@@ -1,0 +1,28 @@
+.topbar {
+  height: 56px;
+  background: var(--primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+}
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 56px;
+  width: 220px;
+  height: calc(100vh - 56px);
+  background: var(--card);
+}
+
+main {
+  margin-left: 220px;
+  padding: 16px;
+}
+
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  main { margin-left: 0; }
+}
