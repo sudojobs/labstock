@@ -25,4 +25,14 @@ input, select, textarea {
   margin-top: 8px;
 }
 
+.logout-btn {
+  background: #fff;
+  color: #3f51b5;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+
 
