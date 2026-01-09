@@ -16,7 +16,8 @@ export function login(email, password) {
 }
 
 export function googleLogin() {
-  return signInWithPopup(auth, new GoogleAuthProvider());
+  const provider = new GoogleAuthProvider();
+  return signInWithPopup(auth, provider);
 }
 
 export function logout() {
