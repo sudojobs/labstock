@@ -26,3 +26,12 @@ export function emptyState(title, message) {
     </div>
   `;
 }
+
+export function loadingState(message = "Loading...") {
+  return `
+    <div class="card" style="text-align:center;opacity:.7">
+      <p>${message}</p>
+    </div>
+  `;
+}
+
