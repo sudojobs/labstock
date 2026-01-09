@@ -1,3 +1,28 @@
+import { db, auth } from "./firebase.js";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  query,
+  where
+} from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
+
+/* =========================
+   FETCH COMPONENTS (DATA)
+========================= */
+export async function getComponents() {
+  const q = query(
+    collection(db, "components"),
+    where("ownerId", "==", auth.currentUser.uid)
+  );
+
+  const snap = await getDocs(q);
+  return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+}
+
+/* =========================
+   LOAD COMPONENTS UI
+========================= */
 export async function loadComponents() {
   const view = document.getElementById("view");
 
@@ -17,10 +42,13 @@ export async function loadComponents() {
   `;
 
   document.getElementById("addCompBtn").onclick = async () => {
-    const name = compName.value.trim();
-    const qty = Number(compQty.value);
+    const name = document.getElementById("compName").value.trim();
+    const qty = Number(document.getElementById("compQty").value);
 
-    if (!name || !qty) return alert("Fill all fields");
+    if (!name || !qty) {
+      alert("Fill all fields");
+      return;
+    }
 
     await addDoc(collection(db, "components"), {
       name,
@@ -29,10 +57,11 @@ export async function loadComponents() {
       createdAt: Date.now()
     });
 
-    loadComponents();
+    loadComponents(); // reload list
   };
 
   const comps = await getComponents();
+
   document.getElementById("compList").innerHTML =
     comps.length
       ? comps.map(c =>
