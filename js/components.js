@@ -1,7 +1,3 @@
-
-
-
-
 export async function loadComponents() {
   const view = document.getElementById("view");
 
@@ -26,7 +22,12 @@ export async function loadComponents() {
 
     if (!name || !qty) return alert("Fill all fields");
 
-    
+    await addDoc(collection(db, "components"), {
+      name,
+      quantity: qty,
+      ownerId: auth.currentUser.uid,
+      createdAt: Date.now()
+    });
 
     loadComponents();
   };
