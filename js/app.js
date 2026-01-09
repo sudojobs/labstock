@@ -7,6 +7,23 @@ auth.onAuthStateChanged(user => {
 
 logoutBtn.onclick = logout;
 
+const view = document.getElementById("view");
+const params = new URLSearchParams(location.search);
+
+if (params.get("box")) {
+  loadBox(params.get("box"));
+}
+
+async function loadBox(boxId) {
+  const comps = await getComponents({ boxId });
+  view.innerHTML = comps.map(c => `
+    <div class="card">
+      <h3>${c.name}</h3>
+      <p>Qty: ${c.quantity}</p>
+    </div>
+  `).join("");
+}
+
 // QR AUTO FILTER
 const params = new URLSearchParams(location.search);
 if (params.get("box")) {
