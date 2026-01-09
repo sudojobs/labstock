@@ -1,3 +1,28 @@
+import { db, auth } from "./firebase.js";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  query,
+  where
+} from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
+
+/* =========================
+   FETCH SHELVES (DATA)
+========================= */
+export async function getShelves() {
+  const q = query(
+    collection(db, "shelves"),
+    where("ownerId", "==", auth.currentUser.uid)
+  );
+
+  const snap = await getDocs(q);
+  return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+}
+
+/* =========================
+   LOAD SHELVES UI
+========================= */
 export async function loadShelves() {
   const view = document.getElementById("view");
 
@@ -17,7 +42,10 @@ export async function loadShelves() {
 
   document.getElementById("addShelfBtn").onclick = async () => {
     const name = document.getElementById("shelfName").value.trim();
-    if (!name) return alert("Enter shelf name");
+    if (!name) {
+      alert("Enter shelf name");
+      return;
+    }
 
     await addDoc(collection(db, "shelves"), {
       name,
@@ -25,15 +53,15 @@ export async function loadShelves() {
       createdAt: Date.now()
     });
 
-    loadShelves();
+    loadShelves(); // reload list
   };
 
   const shelves = await getShelves();
   const list = document.getElementById("shelfList");
 
   list.innerHTML = shelves.length
-    ? shelves.map(s => `
-        <div class="card">📚 ${s.name}</div>
-      `).join("")
+    ? shelves.map(s =>
+        `<div class="card">📚 ${s.name}</div>`
+      ).join("")
     : `<p>No shelves created yet</p>`;
 }
