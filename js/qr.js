@@ -1,12 +1,11 @@
-import QRCode from "https://cdn.jsdelivr.net/npm/qrcode@1.5.3/+esm";
+import QRCode from "https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js";
+import { getBoxes } from "./boxes.js";
+
 
 export async function generateBoxQR(boxId) {
   const url = `${location.origin}/?box=${boxId}`;
   return await QRCode.toDataURL(url, { width: 300 });
 }
-
-import QRCode from "https://cdn.jsdelivr.net/npm/qrcode@1.5.3/+esm";
-import { getBoxes } from "./boxes.js";
 
 export async function loadQR() {
   const view = document.getElementById("view");
