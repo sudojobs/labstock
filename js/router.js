@@ -23,6 +23,8 @@ export function initRouter() {
       location.hash = btn.dataset.view;
       navigate(btn.dataset.view);
     };
+  renderRoute(); // initial load
+    
   });
 
   // Load initial route
@@ -38,6 +40,20 @@ export function initRouter() {
   });
 }
 
+
+function renderRoute() {
+  const view = location.hash.replace("#", "") || "dashboard";
+
+  // 👉 ACTIVE SIDEBAR HIGHLIGHT (THIS IS WHERE)
+  document.querySelectorAll(".sidebar button").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.view === view);
+  });
+
+  routes[view]?.();
+}
+
+
+
 export function navigate(view) {
   const container = document.getElementById("view");
   container.innerHTML = "";
@@ -49,3 +65,6 @@ export function navigate(view) {
 
   routes[view]();
 }
+
+
+
