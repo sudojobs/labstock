@@ -1,5 +1,21 @@
 import { auth } from "./firebase.js";
 import { logout } from "./auth.js";
+import { auth } from "./firebase.js";
+import { logout } from "./auth.js";
+import { initRouter } from "./router.js";
+
+auth.onAuthStateChanged(user => {
+  if (!user) location.href = "/login.html";
+  else initRouter();
+});
+
+document.getElementById("logoutBtn").onclick = logout;
+
+// QR auto-open
+const p = new URLSearchParams(location.search);
+if (p.get("box")) {
+  history.replaceState({}, "", "/");
+}
 
 auth.onAuthStateChanged(user => {
   if (!user) location.href = "/login.html";
