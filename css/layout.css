@@ -22,17 +22,14 @@
   padding: 0 16px;
 }
 
-.sidebar button.active {
-  background: #e8eaf6;
-  font-weight: 600;
-}
-
+/* ⭐ FLEX LAYOUT FIX ⭐ */
 .layout {
   display: flex;
   width: 100%;
   height: calc(100vh - 56px);
 }
 
+/* ⭐ SIDEBAR MUST BE NORMAL FLOW ⭐ */
 .sidebar {
   width: 240px;
   min-width: 240px;
@@ -42,6 +39,7 @@
   box-sizing: border-box;
 }
 
+/* ⭐ CONTENT AREA ⭐ */
 .view {
   flex: 1;
   padding: 24px;
@@ -49,3 +47,7 @@
   background: #f7f7f7;
 }
 
+.sidebar button.active {
+  background: #e8eaf6;
+  font-weight: 600;
+}
