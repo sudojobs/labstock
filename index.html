@@ -1,47 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>LabStock Pro</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- PWA -->
-  <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#3f51b5">
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="/css/theme.css">
-  <link rel="stylesheet" href="/css/app.css">
-
-  <!-- Firebase + App -->
-  <script type="module" src="/js/app.js"></script>
-</head>
-
 <body>
+
+<!-- AUTH LOADING SCREEN -->
+<div id="auth-loading" class="auth-loading">
+  <h2>🔧 LabStock</h2>
+  <p>Checking authentication…</p>
+</div>
+
+<!-- APP ROOT (HIDDEN INITIALLY) -->
+<div id="app" class="hidden">
+
   <header class="topbar">
-    <h1>🔧 LabStock</h1>
-    <button id="logoutBtn">Logout</button>
+    <div class="brand">🔧 LabStock</div>
+    <button id="logoutBtn" class="logout-btn">Logout</button>
   </header>
 
-  <nav class="sidebar">
-    <button data-view="dashboard">Dashboard</button>
-    <button data-view="shelves">Shelves</button>
-    <button data-view="boxes">Boxes</button>
-    <button data-view="components">Components</button>
-    <button data-view="qr">QR Codes</button>
-  </nav>
+  <div class="layout">
+    <aside class="sidebar">
+      <button data-view="dashboard">📊 Dashboard</button>
+      <button data-view="shelves">📚 Shelves</button>
+      <button data-view="boxes">📦 Boxes</button>
+      <button data-view="components">🔩 Components</button>
+      <button data-view="qr">🔳 QR Codes</button>
+      <button data-view="backup">💾 Backup</button>
+    </aside>
 
-  <main id="view">
-    <!-- Dynamic content loads here -->
-  </main>
+    <main id="view" class="view"></main>
+  </div>
 
-  <footer class="mobile-nav">
-    <button data-view="dashboard">🏠</button>
-    <button data-view="shelves">📚</button>
-    <button data-view="boxes">📦</button>
-    <button data-view="components">🔩</button>
-  </footer>
-  <script>
+</div>
+
+<script type="module" src="/js/app.js"></script>
+
+<script>
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("/service-worker.js");
 }
