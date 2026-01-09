@@ -3,34 +3,32 @@ import { logout } from "./auth.js";
 import { initRouter, navigate } from "./router.js";
 import { loadComponents } from "./components.js";
 
+const authLoading = document.getElementById("auth-loading");
+const app = document.getElementById("app");
 const logoutBtn = document.getElementById("logoutBtn");
 
-// Auth guard
+// HARD AUTH GATE
 auth.onAuthStateChanged(user => {
   if (!user) {
-    location.href = "/login.html";
+    // NOT logged in → go to login page
+    window.location.replace("/login.html");
     return;
   }
 
-  // Start router after auth
+  // Logged in → show app
+  authLoading.style.display = "none";
+  app.classList.remove("hidden");
+
+  // Init router AFTER auth confirmed
   initRouter();
 
   // Handle QR deep links
   const params = new URLSearchParams(location.search);
-
   if (params.get("box")) {
     navigate("components");
     loadComponents({ boxId: params.get("box") });
     history.replaceState({}, "", "/");
   }
-
-  if (params.get("shelf")) {
-    navigate("components");
-    loadComponents({ shelfId: params.get("shelf") });
-    history.replaceState({}, "", "/");
-  }
 });
 
-if (logoutBtn) {
-  logoutBtn.onclick = logout;
-}
+logoutBtn.onclick = logout;
