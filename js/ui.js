@@ -16,3 +16,13 @@ export function toast(msg) {
 export function confirmBox(msg) {
   return confirm(msg);
 }
+
+export function emptyState(title, message) {
+  return `
+    <div class="card" style="text-align:center;opacity:.8">
+      <img src="/assets/empty.svg" style="width:120px;margin:20px auto">
+      <h3>${title}</h3>
+      <p>${message}</p>
+    </div>
+  `;
+}
