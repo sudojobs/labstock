@@ -1,39 +1,74 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Login – LabStock</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <title>LabStock – Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- CSS (SAME AS APP) -->
   <link rel="stylesheet" href="/css/theme.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
 </head>
 
-<body class="centered">
-  <div class="card">
-    <h2>LabStock Login</h2>
+<body>
 
-    <input id="email" placeholder="Email">
-    <input id="password" type="password" placeholder="Password">
+  <div class="auth-loading">
+    <div class="card" style="max-width:360px;width:100%">
+      <h2 style="text-align:center">🔧 LabStock</h2>
 
-    <button id="loginBtn">Login</button>
-    <button id="signupBtn">Sign Up</button>
-    <button id="googleBtn">Login with Google</button>
+      <input id="email" type="email" placeholder="Email">
+      <input id="password" type="password" placeholder="Password">
+
+      <button id="loginBtn">Login</button>
+      <button id="signupBtn" class="secondary">Sign Up</button>
+
+      <hr style="margin:16px 0">
+
+      <button id="googleBtn">Login with Google</button>
+    </div>
   </div>
 
+  <!-- AUTH LOGIC -->
   <script type="module">
     import { login, signup, googleLogin } from "/js/auth.js";
+    import { auth } from "/js/firebase.js";
 
-    loginBtn.onclick = () => login(email.value, password.value);
-    signupBtn.onclick = () => signup(email.value, password.value);
-    googleBtn.onclick = () => googleLogin();
+    const email = document.getElementById("email");
+    const password = document.getElementById("password");
+
+    document.getElementById("loginBtn").onclick = async () => {
+      try {
+        await login(email.value, password.value);
+        window.location.replace("/");
+      } catch (e) {
+        alert(e.message);
+      }
+    };
+
+    document.getElementById("signupBtn").onclick = async () => {
+      try {
+        await signup(email.value, password.value);
+        window.location.replace("/");
+      } catch (e) {
+        alert(e.message);
+      }
+    };
+
+    document.getElementById("googleBtn").onclick = async () => {
+      try {
+        await googleLogin();
+        window.location.replace("/");
+      } catch (e) {
+        alert(e.message);
+      }
+    };
+
+    // If already logged in, skip login page
+    auth.onAuthStateChanged(user => {
+      if (user) window.location.replace("/");
+    });
   </script>
-
-  <script src="/js/app.js">
-
- <script>
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/service-worker.js");
-}
-</script>
-  
 
 </body>
 </html>
