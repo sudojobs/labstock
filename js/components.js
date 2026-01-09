@@ -12,15 +12,17 @@ export async function addComponent(data) {
   });
 }
 
-import { emptyState } from "./ui.js";
+import { loadingState, emptyState } from "./ui.js";
 
 export async function loadComponents(filter = {}) {
   const view = document.getElementById("view");
+  view.innerHTML = loadingState();
+
   const components = await getComponents(filter);
 
   if (!components.length) {
     view.innerHTML = emptyState(
-      "No Components Found",
+      "No Components",
       "Add components or scan a box QR code"
     );
     return;
@@ -30,7 +32,6 @@ export async function loadComponents(filter = {}) {
     <div class="card">
       <h3>${c.name}</h3>
       <p>Qty: ${c.quantity}</p>
-      <p>${c.package || ""}</p>
     </div>
   `).join("");
 }
