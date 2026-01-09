@@ -26,7 +26,13 @@ view.innerHTML = `
   <div id="boxList"></div>
 `;
 
-  
+  await addDoc(collection(db, "boxes"), {
+  name,
+  shelfId: boxShelf.value,
+  ownerId: auth.currentUser.uid,
+  createdAt: Date.now()
+});
+
   view.innerHTML = `
     <div class="page-title">📦 Boxes</div>
 
