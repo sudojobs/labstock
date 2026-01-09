@@ -1,4 +1,9 @@
-[[redirects]]
-from = "/*"
-to = "/index.html"
-status = 200
+{
+  "name": "LabStock Pro",
+  "short_name": "LabStock",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3f51b5"
+}
+
