@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login – LabStock</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/css/theme.css">
+</head>
+
+<body class="centered">
+  <div class="card">
+    <h2>LabStock Login</h2>
+
+    <input id="email" placeholder="Email">
+    <input id="password" type="password" placeholder="Password">
+
+    <button id="loginBtn">Login</button>
+    <button id="signupBtn">Sign Up</button>
+    <button id="googleBtn">Login with Google</button>
+  </div>
+
+  <script type="module">
+    import { login, signup, googleLogin } from "/js/auth.js";
+
+    loginBtn.onclick = () => login(email.value, password.value);
+    signupBtn.onclick = () => signup(email.value, password.value);
+    googleBtn.onclick = () => googleLogin();
+  </script>
+</body>
+</html>
