@@ -5,12 +5,12 @@ import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.0/firebase
 import { getStorage } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-storage.js";
 
 const firebaseConfig = {
-  apiKey: "PASTE",
-  authDomain: "PASTE",
-  projectId: "PASTE",
-  storageBucket: "PASTE",
-  messagingSenderId: "PASTE",
-  appId: "PASTE"
+  apiKey: "AIzaSyBERvTvOgSm5LMhZnyvLeuBbxzfp4cEnp4",
+  authDomain: "labstock-b7155.firebaseapp.com",
+  projectId: "labstock-b7155",
+  storageBucket: "labstock-b7155.firebasestorage.app",
+  messagingSenderId: "618343315522",
+  appId: "1:618343315522:web:0e34a62c3efb2fb3aa55db"
 };
 
 export const app = initializeApp(firebaseConfig);
