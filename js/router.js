@@ -17,14 +17,35 @@ const routes = {
 };
 
 export function initRouter() {
+  // Nav button clicks
   document.querySelectorAll("[data-view]").forEach(btn => {
-    btn.onclick = () => navigate(btn.dataset.view);
+    btn.onclick = () => {
+      location.hash = btn.dataset.view;
+      navigate(btn.dataset.view);
+    };
   });
 
-  navigate("dashboard");
+  // Load initial route
+  const initial =
+    location.hash.replace("#", "") || "dashboard";
+
+  navigate(initial);
+
+  // Back/forward navigation
+  window.addEventListener("hashchange", () => {
+    const view = location.hash.replace("#", "") || "dashboard";
+    navigate(view);
+  });
 }
 
 export function navigate(view) {
-  document.getElementById("view").innerHTML = "";
-  routes[view]?.();
+  const container = document.getElementById("view");
+  container.innerHTML = "";
+
+  if (!routes[view]) {
+    console.warn("Unknown route:", view);
+    return;
+  }
+
+  routes[view]();
 }
