@@ -1,7 +1,6 @@
 export async function loadBoxes() {
   const view = document.getElementById("view");
 
- 
   view.innerHTML = `
     <div class="page-title">📦 Boxes</div>
 
@@ -16,7 +15,6 @@ export async function loadBoxes() {
     <div class="section" id="boxList"></div>
   `;
 
-  
   document.getElementById("addBoxBtn").onclick = async () => {
     const name = document.getElementById("boxName").value.trim();
     if (!name) return alert("Enter box name");
