@@ -28,7 +28,19 @@ export async function loadBoxes() {
     loadBoxes();
   };
 
+  export async function getBoxes() {
+  const q = query(
+    collection(db, "boxes"),
+    where("ownerId", "==", auth.currentUser.uid)
+  );
+  const snap = await getDocs(q);
+  return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+}
+
+ 
   const boxes = await getBoxes();
+ 
+  
   document.getElementById("boxList").innerHTML =
     boxes.length
       ? boxes.map(b => `<div class="card">📦 ${b.name}</div>`).join("")
