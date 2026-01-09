@@ -1,11 +1,30 @@
+.hidden {
+  display: none !important;
+}
+
+.auth-loading {
+  height: 100vh;
+  background: #3f51b5;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .topbar {
   height: 56px;
-  background: var(--primary);
-  color: #fff;
+  background: #3f51b5;
+  color: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
+}
+
+.layout {
+  display: flex;
+  height: calc(100vh - 56px);
 }
 
 .sidebar {
@@ -15,52 +34,7 @@
   padding: 12px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-}
-
-.sidebar button {
-  background: none;
-  border: none;
-  text-align: left;
-  padding: 12px;
-  border-radius: 8px;
-  font-size: 15px;
-  cursor: pointer;
-}
-
-.sidebar button:hover {
-  background: #f0f0f0;
-}
-
-
-main {
-  margin-left: 220px;
-  padding: 16px;
-}
-
-@media (max-width: 768px) {
-  .sidebar { display: none; }
-  main { margin-left: 0; }
-}
-
-.hidden {
-  display: none;
-}
-
-.auth-loading {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: #3f51b5;
-  color: white;
-  font-size: 18px;
-}
-
-.layout {
-  display: flex;
-  height: calc(100vh - 56px);
+  gap: 8px;
 }
 
 .view {
