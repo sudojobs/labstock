@@ -1,6 +1,3 @@
-import { getShelves } from "./shelves.js";
-
-
 export async function loadBoxes() {
   const view = document.getElementById("view");
 
