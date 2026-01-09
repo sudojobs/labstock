@@ -41,5 +41,11 @@
     <button data-view="boxes">📦</button>
     <button data-view="components">🔩</button>
   </footer>
+  <script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/service-worker.js");
+}
+</script>
+
 </body>
 </html>
